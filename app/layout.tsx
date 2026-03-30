@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Playfair_Display } from "next/font/google";
+import Image from "next/image";
 import "./globals.css";
 
 const inter = Inter({
@@ -51,7 +52,18 @@ export default function RootLayout({
       className={`${inter.variable} ${jetbrainsMono.variable} ${playfairDisplay.variable}`}
     >
       <body>
-        <div className="site-wrapper">{children}</div>
+        <div className="site-wrapper">
+          <div style={{ position: "fixed", top: "1.5rem", right: "2rem", zIndex: 200, opacity: 0.9 }}>
+            <Image
+              src="/assets/fairc-logo.png"
+              alt="FAIRC"
+              width={200}
+              height={100}
+              priority
+            />
+          </div>
+          {children}
+        </div>
       </body>
     </html>
   );

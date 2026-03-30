@@ -1,7 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Sidebar from "./components/Sidebar";
 import ScrambleText from "./components/ScrambleText";
+import threads from "./data/threads.json";
+import members from "./data/members.json";
+
+const AVATAR_COLORS = [
+  "#8B7B6B", "#5B7A8A", "#7A5B8A", "#5B8A6B",
+  "#8A6B5B", "#5B6B8A", "#8A7A5B", "#6B5B8A",
+];
+
+function avatarColor(name: string): string {
+  const hash = name.split("").reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+  return AVATAR_COLORS[hash % AVATAR_COLORS.length];
+}
 
 export const metadata: Metadata = {
   title: "FAIRC | Fundamental AI Research Collective",
@@ -10,7 +23,7 @@ export const metadata: Metadata = {
 const navLinks = [
   { href: "#manifesto", label: "Manifesto" },
   { href: "#interests", label: "Interests" },
-  { href: "#inquiry", label: "Inquiry" },
+  { href: "#threads", label: "Threads" },
   { href: "#artifacts", label: "Artifacts" },
   { href: "#collective", label: "Collective" },
 ];
@@ -30,12 +43,12 @@ export default function Home() {
         {/* Manifesto */}
         <header id="manifesto" className="hero">
           <span className="hero-label">Manifesto // 001</span>
-          <h1>
-            <ScrambleText
-              text={"Fundamental AI\nResearch Collective."}
-              scrambleOnMount
-            />
-          </h1>
+            <h1>
+              <ScrambleText
+                text={"Fundamental AI\nResearch Collective."}
+                scrambleOnMount
+              />
+            </h1>
           <p>
             FAIRC is a research collective for fundamental AI research. We work
             at the boundary of theory and experiment, driven by the conviction
@@ -138,55 +151,23 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Current Inquiry */}
-        <section id="inquiry">
+        {/* Open Threads */}
+        <section id="threads">
           <div className="section-grid">
             <div className="section-title">
-              <ScrambleText text="02 — Current Inquiry" className="block" />
+              <ScrambleText text="02 — Open Threads" className="block" />
             </div>
             <div className="section-content">
-              <article className="entry">
-                <h3>
-                  Breaking Superposition
-                  <br />
-                  with Learned Routing
-                </h3>
-                <p>
-                  In standard neural networks, individual neurons encode
-                  multiple unrelated features in superposition—a consequence of
-                  networks learning more features than they have dimensions. This
-                  &quot;polysemanticity&quot; makes interpretability difficult.
-                  Our approach scales the FFN hidden dimension massively (e.g.,
-                  32,000 neurons vs. the standard 768) while enforcing extreme
-                  sparsity—activating only 30–50 relevant neurons per token.
-                </p>
-                <p>
-                  This architecture dramatically reduces FLOPs compared to dense
-                  baselines. By decoupling parameter count from compute, we
-                  allow models to possess vast specialized knowledge without the
-                  computational cost of activating the entire network for every
-                  token. While research from Anthropic suggests Sparse
-                  Autoencoders (SAEs) can extract these features post-hoc, we
-                  aim to bake this &quot;monosemanticity&quot; directly into the
-                  model—ensuring each neuron represents a single, crisp concept
-                  rather than a polysemantic soup.
-                </p>
-              </article>
-              <article className="entry">
-                <h3>Token Deep Memory</h3>
-                <p>
-                  Standard attention scales quadratically because it treats
-                  every token as equally important. We view memory as a dynamic
-                  mix of proper tokens and compressed &quot;gists.&quot; In our
-                  architecture, blocks of historical tokens are continuously
-                  averaged into summary embeddings h̄ = (1/k) ∑ hᵢ, preserving
-                  the semantic idea while discarding high-frequency detail. This
-                  allows the model to maintain massive contexts by holding most
-                  information in a compressed state, only accessing the full
-                  fidelity of specific memory fragments when necessary for the
-                  current reasoning step.
-                </p>
-              </article>
+              {threads.map((thread) => (
+                <article key={thread.slug} className="entry thread-card">
+                  <h3>{thread.cardTitle}</h3>
+                  <span className="subtitle">{thread.tag}</span>
+                  <p>{thread.summary}</p>
+                  <Link href={`/threads/${thread.slug}`} className="hover-link">
+                    READ FULL THREAD ↗
+                  </Link>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -235,6 +216,44 @@ export default function Home() {
                   </a>
                   .
                 </p>
+
+                <div className="member-grid">
+                  {members.map((member) => {
+                    const initials = member.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("");
+                    const bg = avatarColor(member.name);
+                    return (
+                      <a
+                        key={member.name}
+                        href={member.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="member-card"
+                      >
+                        <div className="member-photo">
+                          {member.photo ? (
+                            <Image
+                              src={member.photo}
+                              alt={member.name}
+                              width={64}
+                              height={64}
+                            />
+                          ) : (
+                            <span
+                              className="member-initials"
+                              style={{ backgroundColor: bg }}
+                            >
+                              {initials}
+                            </span>
+                          )}
+                        </div>
+                        <span className="member-name">{member.name}</span>
+                      </a>
+                    );
+                  })}
+                </div>
                 <div
                   style={{
                     fontFamily: "var(--font-mono)",

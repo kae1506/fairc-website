@@ -323,6 +323,13 @@ section {
     border-left: 4px solid var(--red-accent);
 }
 
+/* Thread Card */
+.thread-card {
+    background-color: rgba(0, 0, 0, 0.018);
+    padding: 1.75rem 2rem;
+    border-top: 1px solid #e4e4de;
+}
+
 /* Hover link underline animation */
 .hover-link {
     position: relative;
@@ -476,6 +483,155 @@ code.inline {
     font-family: var(--font-mono);
     background: #e8e8e4;
     padding: 0.1em 0.3em;
+}
+
+/* Member Grid */
+.member-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin-top: 1.75rem;
+}
+
+.member-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: opacity 0.2s;
+}
+
+.member-card:hover {
+    opacity: 0.6;
+}
+
+.member-photo {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.member-initials {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: #fff;
+    letter-spacing: 0.05em;
+}
+
+.member-name {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--text-main);
+    text-align: center;
+}
+
+/* Thread Posts */
+.thread-post {
+    padding: 3rem 0;
+    border-bottom: 1px solid #e4e4de;
+}
+
+.thread-post:last-child {
+    border-bottom: none;
+}
+
+.thread-post-header {
+    margin-bottom: 1.75rem;
+}
+
+.thread-post-header h3 {
+    font-size: 2rem;
+    margin-bottom: 0.4rem;
+}
+
+.thread-post-date {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* Prose — rendered markdown body */
+.prose {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    color: #444;
+    max-width: 680px;
+    line-height: 1.75;
+}
+
+.prose p {
+    margin-bottom: 1.4rem;
+}
+
+.prose h2 {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin: 2.5rem 0 0.75rem;
+    color: var(--text-main);
+}
+
+.prose h3 {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin: 2rem 0 0.6rem;
+    color: var(--text-main);
+}
+
+.prose ul,
+.prose ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.4rem;
+}
+
+.prose li {
+    margin-bottom: 0.4rem;
+}
+
+.prose strong {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.prose em {
+    font-style: italic;
+}
+
+.prose blockquote {
+    border-left: 3px solid #ccc;
+    padding: 0.5rem 0 0.5rem 1.25rem;
+    color: var(--text-muted);
+    margin: 1.5rem 0;
+}
+
+.prose code {
+    font-family: var(--font-mono);
+    background: #e8e8e4;
+    padding: 0.1em 0.3em;
+    font-size: 0.9em;
 }
 
 /* Two-col audience grid (OLM page) */
