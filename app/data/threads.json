@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "superposition-routing",
+    "cardTitle": "Breaking Superposition with Learned Routing",
+    "tag": "INTERPRETABILITY",
+    "summary": "Our approach scales the FFN hidden dimension massively while enforcing extreme sparsity—baking monosemanticity directly into the model.",
+    "pageTitle": "Breaking Superposition\nwith Learned Routing.",
+    "meta": ["THREAD: SUPERPOSITION", "DOMAIN: INTERPRETABILITY", "STATUS: ACTIVE"],
+    "posts": [
+      "01-the-problem.md",
+      "02-the-approach.md"
+    ]
+  },
+  {
+    "slug": "token-deep-memory",
+    "cardTitle": "Token Deep Memory",
+    "tag": "ARCHITECTURE",
+    "summary": "A dynamic memory architecture that mixes full-fidelity tokens with compressed gist embeddings to achieve massive context at sub-quadratic cost.",
+    "pageTitle": "Token Deep\nMemory.",
+    "meta": ["THREAD: TOKEN MEMORY", "DOMAIN: ARCHITECTURE", "STATUS: ACTIVE"],
+    "posts": [
+      "01-the-quadratic-wall.md",
+      "02-gist-embeddings.md"
+    ]
+  }
+]
